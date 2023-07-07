@@ -15,4 +15,5 @@ jobs:
       with:
         node-version: '16'
     - run: npm install
+    - run: node node_modules/puppeteer/install.js
     - run: npm run eud_rocks_login
