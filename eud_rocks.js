@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 
+console.log('env:', process.env);
+
 (async () => {
   const browser = await puppeteer.launch(); //{ headless: false }
 
