@@ -1,20 +1,17 @@
-# This is a basic workflow that is manually triggered
+name: Tests
 
-name: Manual workflow
-
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
-    # The type of runner that the job will run on
+  test:
     runs-on: ubuntu-latest
-
     steps:
-    # Runs a single command using the runners shell
-    - name: Send request
-      run: npm run eud_rocks_login
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - run: npm run eud_rocks_login
