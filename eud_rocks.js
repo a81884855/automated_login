@@ -13,7 +13,11 @@ require('dotenv').config();
 
   await page.goto('https://eud.rocks/user-2');
 
-  page.$eval('a.usercheck.checkin', el => el.click());
+  try {
+    await page.$eval('a.usercheck.checkin', el => el.click());
+  } catch {
+    console.log('Not ready to checkin yet')
+  }
 
   await browser.close();
 })();
