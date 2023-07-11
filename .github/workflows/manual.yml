@@ -16,4 +16,5 @@ jobs:
         node-version: '16'
     - run: npm install
     - run: node node_modules/puppeteer/install.js
+    - run: echo "${{ secrets.ENV_FILE }}" > .env
     - run: npm run eud_rocks_login
