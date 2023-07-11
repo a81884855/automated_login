@@ -1,8 +1,6 @@
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 
-console.log('env:', process.env);
-
 (async () => {
   const browser = await puppeteer.launch(); //{ headless: false }
 
@@ -14,9 +12,8 @@ console.log('env:', process.env);
   await page.setCookie(cookie2)
 
   await page.goto('https://eud.rocks/user-2');
-  const text = await page.$$eval('div.item  b.color', els => els.map(e => e.textContent))
 
-  console.log(text, 'text')
+  page.$eval('a.usercheck.checkin', el => el.click());
 
   await browser.close();
 })();
