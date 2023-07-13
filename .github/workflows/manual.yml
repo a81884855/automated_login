@@ -1,4 +1,4 @@
-name: Tests
+name: Auto-Login-Eud-Rocks
 
 on:
   schedule:
