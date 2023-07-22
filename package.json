@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@infosimples/node_two_captcha": "^1.2.0",
     "dotenv": "^16.3.1",
     "puppeteer": "^20.8.0"
   }
