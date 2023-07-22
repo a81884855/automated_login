@@ -33,7 +33,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
     ]);
 
     const buffer = await imgResponse.buffer();
-    console.log(buffer, 'buffer')
+    console.log(buffer.toString('base64'), 'buffer')
 
     await client.decode({
       buffer,
@@ -50,7 +50,6 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
     } catch {
       console.log('Login failed');
       return await recaptchaBypass(execTimes + 1)
-      return
     }
   }
 
