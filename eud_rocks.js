@@ -13,7 +13,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
 });
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: false }); //{ headless: false }
+  const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] }); //{ headless: false }
 
   const page = await browser.newPage();
 
