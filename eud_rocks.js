@@ -25,14 +25,18 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
   await page.waitForSelector('.captcha-clk2');
 
   recaptchaBypass = async (execTimes = 0) => {
+    page.screenshot()
     if (execTimes > 2) return console.log('retry 3 times');
     const [imgResponse] = await Promise.all([
       page.waitForResponse(imgResponse => imgResponse.url()),
       page.click(execTimes === 0 ? '.captcha-clk2' : '.captcha-img'),
     ]);
 
+    const buffer = await imgResponse.buffer();
+    console.log(buffer, 'buffer')
+
     await client.decode({
-      buffer: await imgResponse.buffer()
+      buffer,
     }).then(async (response) => {
       console.log(response.text);
       await page.$eval('input#captcha', (el, value) => el.value = value, response.text);
@@ -46,6 +50,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
     } catch {
       console.log('Login failed');
       return await recaptchaBypass(execTimes + 1)
+      return
     }
   }
 
