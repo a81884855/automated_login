@@ -3,6 +3,8 @@ const Client = require('@infosimples/node_two_captcha');
 
 require('dotenv').config();
 
+console.log(process.env, 'process.env')
+
 // Declare your client
 const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
   timeout: 60000,
