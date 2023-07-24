@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "eud_rocks_login": "node eud_rocks.js",
+    "eud_rocks_checkin": "node eud_rocks.js",
+    "_1point3arces_checkin": "node 1point3acres.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
