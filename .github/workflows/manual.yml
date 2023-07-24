@@ -1,4 +1,4 @@
-name: Auto-Login-Eud-Rocks
+name: Auto-Sign
 
 on:
   schedule:
@@ -9,7 +9,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  eud_rocks:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -19,4 +19,15 @@ jobs:
     - run: npm install
     - run: node node_modules/puppeteer/install.js
     - run: echo "${{ secrets.ENV_FILE }}" > .env
-    - run: npm run eud_rocks_login
+    - run: npm run eud_rocks_checkin
+  _1point3arces:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+    - run: npm install
+    - run: node node_modules/puppeteer/install.js
+    - run: echo "${{ secrets.ENV_FILE }}" > .env
+    - run: npm run _1point3arces_checkin
