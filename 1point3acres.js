@@ -40,7 +40,7 @@ const retryOperation = async (operation, retries) => {
 }
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: false }); // { headless: false }
+  const browser = await puppeteer.launch(); // { headless: false }
 
   const page = await browser.newPage();
 
