@@ -40,14 +40,16 @@ const retryOperation = async (operation, retries) => {
 }
 
 (async () => {
-  const browser = await puppeteer.launch(); // { headless: false }
+  const browser = await puppeteer.launch({ headless: false }); // { headless: false }
 
   const page = await browser.newPage();
 
   await page.goto('https://auth.1point3acres.com/login');
 
-  await page.type('input[id=username]', process.env.ONE_POINT_THREE_ARCES_USERNAME);
-  await page.type('input[id=password]', process.env.ONE_POINT_THREE_ARCES_PASSWORD);
+  await page.type('input[id="username"]', process.env.ONE_POINT_THREE_ARCES_USERNAME);
+  await page.type('input[id="password"]', process.env.ONE_POINT_THREE_ARCES_PASSWORD);
+
+  await page.waitForTimeout(100000)
 
   const sitekey = await page.evaluate(() => {
     return document.querySelector('.g-recaptcha').getAttribute('data-sitekey')
@@ -61,7 +63,7 @@ const retryOperation = async (operation, retries) => {
 
   await page.$eval('input[name="g-recaptcha-response"]', (el, value) => el.value = value, result);
 
-  await page.click('input[id=submit]')
+  await page.click('input[id="submit"]')
 
   await page.waitForSelector('#qmenu_menu')
   console.log('To landing page')
