@@ -25,6 +25,11 @@ jobs:
         fc-cache
         fc-list :lang=zh
 
+    - name: Install Dependencies
+      run: npm install
+    
+    - run: node node_modules/puppeteer/install.js
+    
     - name: Cache node modules
       uses: actions/cache@v2
       env:
@@ -38,11 +43,6 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    # - name: Install Dependencies
-    #   run: npm install
-    
-    # - run: node node_modules/puppeteer/install.js
-    
     - name: Import env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
     # - run: npm run eud_rocks_checkin
