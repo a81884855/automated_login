@@ -16,7 +16,11 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
+    - uses: "lannonbr/puppeteer-screenshot-action@1.0.0"
+      with:
+        url: https://github.com
     - run: npm install
     - run: node node_modules/puppeteer/install.js
     - run: echo "${{ secrets.ENV_FILE }}" > .env
     - run: npm run eud_rocks_checkin
+    - run: node eud_rocks_new.js
