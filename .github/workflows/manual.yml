@@ -1,4 +1,4 @@
-name: Auto-Sign
+name: Auto-Checkin
 
 on:
   schedule:
@@ -13,11 +13,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: add chinese fonts
+      run: |
+        sudo apt-get install ttf-mscorefonts-installer
+        sudo apt-get install fontconfig
+        fc-list :lang=zh
+        ls -lh /usr/share/fonts/
+        cp -rf ./fonts/* /usr/share/fonts/
+        mkfontscale
+        mkfontdir
+        fc-cache
+        fc-list :lang=zh
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
       with:
-        node-version: '16'
+        # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: ~/.npm
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    # - name: Install Dependencies
     - run: npm install
     - run: node node_modules/puppeteer/install.js
     - run: echo "${{ secrets.ENV_FILE }}" > .env
-    - run: npm run eud_rocks_checkin
+    # - run: npm run eud_rocks_checkin
     - run: node eud_rocks_new.js

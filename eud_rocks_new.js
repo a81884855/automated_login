@@ -3,6 +3,8 @@ const Client = require('@infosimples/node_two_captcha');
 
 require('dotenv').config();
 
+const snapshotPathRoot = './snapshot'
+
 // Declare your client
 const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
   timeout: 60000,
@@ -15,13 +17,19 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
 
   const page = await browser.newPage();
 
-  await page.goto('https://www.1point3acres.com/bbs/');
+  // 开启js有效
+  await page.setJavaScriptEnabled(true)
+  // 配置跳转无超时时间
+  await page.setDefaultNavigationTimeout(0)
+  // 配置默认无超时时间
+  await page.setDefaultTimeout(0)
 
-  await page.waitForTimeout(10000);
+  await page.goto('https://eud.rocks/login');
 
-  const base64 = await page.screenshot({ encoding: 'base64' })
-
-  console.log(JSON.stringify(base64), 'base64')
+  await page.screenshot({
+    path: snapshotPathRoot + (new Date()).toISOString() + ".png",
+    fullPage: true
+  })
 
   return await browser.close();
 
