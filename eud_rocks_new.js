@@ -34,7 +34,10 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
   await page.waitForSelector('.captcha-clk2');
 
   recaptchaBypass = async (execTimes = 0) => {
-    if (execTimes > 2) return console.log('retry 3 times');
+    if (execTimes > 2) {
+      console.log('retry 3 times');
+      return await browser.close();
+    }
     const [imgResponse] = await Promise.all([
       page.waitForResponse(imgResponse => imgResponse.url()),
       page.click(execTimes === 0 ? '.captcha-clk2' : '.captcha-img'),
