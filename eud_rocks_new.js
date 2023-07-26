@@ -15,7 +15,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
 
   const page = await browser.newPage();
 
-  await page.goto('https://eud.rocks/login');
+  await page.goto('https://eud.rocks');
 
   const base64 = await page.screenshot({ encoding: 'base64' })
 
