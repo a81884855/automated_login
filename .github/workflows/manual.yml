@@ -48,7 +48,7 @@ jobs:
     # - run: npm run eud_rocks_checkin
 
     - name: Run script
-      run: node eud_rocks_new.js
+      run: node eud_rocks.js
 
     # - name: Print result
     #   run: ls -lh ./snapshot
