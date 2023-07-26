@@ -17,7 +17,11 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
 
   await page.goto('https://eud.rocks/login');
 
-  await page.screenshot({ path: `./landing.png` })
+  const base64 = await page.screenshot({ encoding: 'base64' })
+
+  console.log(JSON.stringify(base64), 'base64')
+
+  return await browser.close();
 
   await page.waitForSelector('input#username');
   await page.type('input#username', process.env.EUD_ROCKS_USERNAME);
@@ -42,7 +46,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
       await page.$eval('input#captcha', (el, value) => el.value = value, response.text);
     });
 
-    await page.screenshot({ path: `./before_login.png` })
+    await page.screenshot({ path: `./landing.png` })
     await page.click('input[type=submit]')
 
     await page.waitForTimeout(5000);
