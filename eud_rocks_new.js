@@ -17,6 +17,8 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
 
   await page.goto('https://www.1point3acres.com/bbs/');
 
+  await page.waitForTimeout(10000);
+
   const base64 = await page.screenshot({ encoding: 'base64' })
 
   console.log(JSON.stringify(base64), 'base64')
