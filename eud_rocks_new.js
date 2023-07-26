@@ -35,7 +35,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
 
   recaptchaBypass = async (execTimes = 0) => {
     if (execTimes > 2) {
-      console.log('retry 3 times');
+      return console.log('retry 3 times');
     }
     const [imgResponse] = await Promise.all([
       page.waitForResponse(imgResponse => imgResponse.url()),
