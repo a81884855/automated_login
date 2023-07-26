@@ -11,7 +11,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
 });
 
 (async () => {
-  const browser = await puppeteer.launch(); //{ headless: false }
+  const browser = await puppeteer.launch({ args: ['--lang=zh-CN'] }); //{ headless: false }
 
   const page = await browser.newPage();
 
