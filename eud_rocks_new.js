@@ -81,8 +81,13 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
     fullPage: true
   })
 
-  await page.waitForSelector('.close', { timeout: 10000 });
-  await page.click('.close');
+  try {
+    await page.waitForSelector('.close', { timeout: 10000 });
+    await page.click('.close');
+  } catch (err) {
+    console.error(err)
+    await browser.close();
+  }
 
   try {
     await page.$eval('a.usercheck.checkin', el => el.click());
