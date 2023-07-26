@@ -3,7 +3,7 @@ const Client = require('@infosimples/node_two_captcha');
 
 require('dotenv').config();
 
-const snapshotPathRoot = './snapshot'
+const snapshotPathRoot = './snapshot/'
 
 // Declare your client
 const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
@@ -27,7 +27,7 @@ const client = new Client(process.env.CAPTCHA_SOLVER_KEY, {
   await page.goto('https://eud.rocks/login');
 
   await page.screenshot({
-    path: snapshotPathRoot + (new Date()).toISOString() + ".png",
+    path: snapshotPathRoot + `Landing_${Date.now().toString()}.png`,
     fullPage: true
   })
 
