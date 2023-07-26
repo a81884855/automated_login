@@ -44,3 +44,13 @@ jobs:
     - run: echo "${{ secrets.ENV_FILE }}" > .env
     # - run: npm run eud_rocks_checkin
     - run: node eud_rocks_new.js
+    - name: Print result
+    run: ls -lh ./snapshot
+
+    - name: Push snapshot
+    - run: |
+      git config --global user.name 'a81884855'
+      git config --global user.email 'garyguan0713@gmail.com'
+      git add snapshot/
+      git commit -am "push new snapshot"
+      git push
